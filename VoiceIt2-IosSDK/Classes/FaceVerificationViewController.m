@@ -178,7 +178,7 @@ float initialBrightnessFV = 0.0;
         });
     }
     
-    // Passed Liveness and Passed API 2 Verification
+    // Passed Liveness and Passed API 3 Verification
     if(self.success){
         NSLog(@"Liveness Passed and Retry is False : result : %@", self.uiMessage);
         self.isProcessing = NO;
