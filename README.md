@@ -2,7 +2,7 @@
 
 # VoiceIt2 iOS SDK [![Build Status](https://travis-ci.com/voiceittech/VoiceIt3-IosSDK.svg?branch=master)](https://travis-ci.com/voiceittech/VoiceIt3-IosSDK) [![version](https://img.shields.io/cocoapods/v/VoiceIt3-IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceIt3-IosSDK) [![name](https://img.shields.io/cocoapods/p/VoiceIt3-IosSDK.svg?style=flat)](http://cocoapods.org/pods/VoiceIt3-IosSDK) ![MIT](https://img.shields.io/github/license/mashape/apistatus.svg)
 
-A fully comprehensive SDK that gives you access to VoiceIt's API 2.0 featuring Voice + Face Verification and Identification with built in user interfaces and liveness detection.
+A fully comprehensive SDK that gives you access to VoiceIt's API 3.0 featuring Voice + Face Verification and Identification with built in user interfaces and liveness detection.
 
 ## Table of Contents
 
@@ -63,7 +63,7 @@ The following gifs show the UI for Voice Verification, Face Verification (With l
 
 ## Getting Started
 
-Contact us at <a href="mailto:support@voiceit.io" target="_blank">support@voiceit.io</a> to get started with an account to use API 2.0.
+Contact us at <a href="mailto:support@voiceit.io" target="_blank">support@voiceit.io</a> to get started with an account to use API 3.0.
 
 <img src="./Graphics/getcredentials.png" alt="API Key and Token" width="400px" />
 
@@ -103,7 +103,7 @@ Please make sure that the minimum Deployment Target for your project is IOS 11
 
 #### API Key and Token 
 
-Contact us at <a href="mailto:support@voiceit.io" target="_blank">support@voiceit.io</a> to get started with an account to use API 2.0.
+Contact us at <a href="mailto:support@voiceit.io" target="_blank">support@voiceit.io</a> to get started with an account to use API 3.0.
 
 #### Voicprint Phrases
 
