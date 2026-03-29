@@ -68,31 +68,36 @@ Contact us at <a href="mailto:support@voiceit.tech" target="_blank">support@voic
 
 ## Installation
 
-VoiceIt3-IosSDK is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+### Swift Package Manager (Recommended)
+
+In Xcode, go to **File > Add Package Dependencies** and enter the repository URL:
+
+```
+https://github.com/voiceittech/VoiceIt3-IosSDK.git
+```
+
+Select the version and add it to your target.
+
+### CocoaPods
+
+Alternatively, add the following to your Podfile:
 
 ```ruby
 pod "VoiceIt3-IosSDK"
 ```
 
-and then run pod install in your terminal
+Then run:
 
 ```bash
 pod install
 ```
 
-Also add the following permission keys to your <b>info.plist</b> file like shown below:
+### Permissions
 
-* NSCameraUsageDescription - Needed for Face Biometrics
-* NSMicrophoneUsageDescription - Needed for Voice Biometrics
+Add the following keys to your **Info.plist**:
 
-<img src="Graphics/Screenshot2.png" alt="API Key and Token" width="400px" style="margin:auto;display:block"/>
-
-## Local Installation
-To run the SDK locally in your porject, please clone this repository, and specifiy the path in your podfile. For instance: 
-```
-  pod "VoiceIt3-IosSDK", :path => './VoiceIt3-IosSDK'
-```
+* `NSCameraUsageDescription` - Required for Face Biometrics
+* `NSMicrophoneUsageDescription` - Required for Voice Biometrics
 
 
 ## Requirements 

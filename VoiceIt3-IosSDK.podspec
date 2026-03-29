@@ -23,7 +23,7 @@ s.summary          = 'A pod that lets you add voice and face verification and id
 s.description      = 'A pod that lets you add voice and face verification and identification to your iOS apps, brought to you by VoiceIt. Please visit https://voiceit.io to learn more and sign up for an account.'
 s.homepage         = 'https://github.com/voiceittech/VoiceIt3-IosSDK'
 s.license          = { :type => 'MIT', :file => 'LICENSE' }
-s.author           = { 'voiceit' => 'support@voiceit.io' }
+s.author           = { 'voiceit' => 'support@voiceit.tech' }
 s.source           = { :git => 'https://github.com/voiceittech/VoiceIt3-IosSDK.git', :tag => s.version.to_s }
 
 s.ios.deployment_target = '11.0'
