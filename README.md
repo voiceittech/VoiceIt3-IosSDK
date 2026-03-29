@@ -95,7 +95,7 @@ Please make sure that the minimum Deployment Target for your project is IOS 11
 
 Contact us at <a href="mailto:support@voiceit.tech" target="_blank">support@voiceit.tech</a> to get started with an account to use API 3.0.
 
-#### Voicprint Phrases
+#### Voiceprint Phrases
 
 Make sure you review your Voiceprint Phrases by navigating to <a href="https://dashboard.voiceit.io/phrase_manager/phrase_list" target="_blank">Dashboard</a> in order to know what to pass for voicePrintPhrase parameter.
 
@@ -104,9 +104,7 @@ Make sure you review your Voiceprint Phrases by navigating to <a href="https://d
 All strings utilized in the encapsulated views for the SDK and the prompts provided to the user can be modified by editing the strings in the Prompts.strings file located at
 
 ```
-Pods/VoiceIt3-IosSDK/Resources/Prompts.strings
 ```
-You might have to unlock the Cocoapod to edit the file.
 
 ## API Calls
 
@@ -230,9 +228,9 @@ Verify user with given userId(begins with 'usr_'). Note: Immediately upon callin
 myVoiceIt?.encapsulatedVoiceVerification("USER_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", voicePrintPhrase: "my face and voice identify me", userVerificationCancelled: {
     print("User Cancelled Verification");
 }, userVerificationSuccessful: {(voiceConfidence, jsonResponse) in
-    print("User Verication Successful, voiceConfidence : \(voiceConfidence)")
+    print("User Verification Successful, voiceConfidence : \(voiceConfidence)")
 }, userVerificationFailed: { (voiceConfidence, jsonResponse) in
-    print("User Verication Failed, voiceConfidence : \(voiceConfidence)")
+    print("User Verification Failed, voiceConfidence : \(voiceConfidence)")
 })
 ```
 
@@ -241,9 +239,9 @@ myVoiceIt?.encapsulatedVoiceVerification("USER_ID_HERE", contentLanguage: "CONTE
 [self.myVoiceIt encapsulatedVoiceVerification:@"USER_ID_HERE" contentLanguage:@"CONTENT_LANGUAGE_HERE" voicePrintPhrase:@"my face and voice identify me" userVerificationCancelled:^{
     NSLog(@"User Cancelled Verification");
 } userVerificationSuccessful:^(float voiceConfidence, NSString * jsonResponse){
-    NSLog(@"User Verication Successful, voiceConfidence : %g",voiceConfidence);
+    NSLog(@"User Verification Successful, voiceConfidence : %g",voiceConfidence);
 } userVerificationFailed:^(float faceConfidence, float voiceConfidence, NSString * jsonResponse){
-    NSLog(@"User Verication Failed, voiceConfidence : %g",voiceConfidence);
+    NSLog(@"User Verification Failed, voiceConfidence : %g",voiceConfidence);
 }];
 ```
 
@@ -255,9 +253,9 @@ myVoiceIt?.encapsulatedVoiceVerification("USER_ID_HERE", contentLanguage: "CONTE
 myVoiceIt?.encapsulatedFaceVerification("USER_ID_HERE", doAudioPrompts:true, userVerificationCancelled: {
     print("User Cancelled Verification");
 }, userVerificationSuccessful: {(faceConfidence, jsonResponse) in
-    print("User Verication Successful faceConfidence : \(faceConfidence)")
+    print("User Verification Successful faceConfidence : \(faceConfidence)")
 }, userVerificationFailed: { (faceConfidence, jsonResponse) in
-    print("User Verication Failed, faceConfidence : \(faceConfidence)")
+    print("User Verification Failed, faceConfidence : \(faceConfidence)")
 })
 ```
 
@@ -266,9 +264,9 @@ myVoiceIt?.encapsulatedFaceVerification("USER_ID_HERE", doAudioPrompts:true, use
 [self.myVoiceIt encapsulatedFaceVerification:@"USER_ID_HERE" doAudioPrompts:YES userVerificationCancelled:^{
     NSLog(@"User Cancelled Verification");
 } userVerificationSuccessful:^(float faceConfidence, NSString * jsonResponse){
-    NSLog(@"User Verication Successful faceConfidence : %g", faceConfidence);
+    NSLog(@"User Verification Successful faceConfidence : %g", faceConfidence);
 } userVerificationFailed:^(float faceConfidence, NSString * jsonResponse){
-    NSLog(@"User Verication Failed, faceConfidence : %g",faceConfidence);
+    NSLog(@"User Verification Failed, faceConfidence : %g",faceConfidence);
 }];
 ```
 
@@ -281,9 +279,9 @@ myVoiceIt?.encapsulatedFaceVerification("USER_ID_HERE", doAudioPrompts:true, use
 myVoiceIt?.encapsulatedVideoVerification("USER_ID_HERE", contentLanguage: "CONTENT_LANGUAGE_HERE", voicePrintPhrase: "my face and voice identify me", doAudioPrompts:true, userVerificationCancelled: {
     print("User Cancelled Verification");
 }, userVerificationSuccessful: {(faceConfidence, voiceConfidence, jsonResponse) in
-    print("User Verication Successful, voiceConfidence : \(voiceConfidence), faceConfidence : \(faceConfidence)")
+    print("User Verification Successful, voiceConfidence : \(voiceConfidence), faceConfidence : \(faceConfidence)")
 }, userVerificationFailed: { (faceConfidence, voiceConfidence, jsonResponse) in
-    print("User Verication Failed, voiceConfidence : \(voiceConfidence), faceConfidence : \(faceConfidence)")
+    print("User Verification Failed, voiceConfidence : \(voiceConfidence), faceConfidence : \(faceConfidence)")
 })
 ```
 
@@ -292,9 +290,9 @@ myVoiceIt?.encapsulatedVideoVerification("USER_ID_HERE", contentLanguage: "CONTE
 [self.myVoiceIt encapsulatedVideoVerification:@"USER_ID_HERE" contentLanguage:@"CONTENT_LANGUAGE_HERE" voicePrintPhrase:@"my face and voice identify me" doAudioPrompts:YES userVerificationCancelled:^{
     NSLog(@"User Cancelled Verification");
 } userVerificationSuccessful:^(float faceConfidence, float voiceConfidence, NSString * jsonResponse){
-    NSLog(@"User Verication Successful, voiceConfidence : %g , faceConfidence : %g",voiceConfidence, faceConfidence);
+    NSLog(@"User Verification Successful, voiceConfidence : %g , faceConfidence : %g",voiceConfidence, faceConfidence);
 } userVerificationFailed:^(float faceConfidence, float voiceConfidence, NSString * jsonResponse){
-    NSLog(@"User Verication Failed, voiceConfidence : %g , faceConfidence : %g",voiceConfidence, faceConfidence);
+    NSLog(@"User Verification Failed, voiceConfidence : %g , faceConfidence : %g",voiceConfidence, faceConfidence);
 }];
 ```
 
@@ -814,7 +812,7 @@ phrase: @"VOICEPRINT_PHRASE_HERE" callback:^(NSString * jsonResponse){
 
 #### Face Identification
 
-Identify user' face inside group with the given groupId(begins with 'grp_') and videoFile.
+Identify user's face inside group with the given groupId(begins with 'grp_') and videoFile.
 
 ##### *Swift*
 ```swift
