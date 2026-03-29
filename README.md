@@ -68,7 +68,7 @@ Contact us at <a href="mailto:support@voiceit.tech" target="_blank">support@voic
 
 ## Installation
 
-### Swift Package Manager (Recommended)
+### Swift Package Manager
 
 In Xcode, go to **File > Add Package Dependencies** and enter the repository URL:
 
@@ -77,20 +77,6 @@ https://github.com/voiceittech/VoiceIt3-IosSDK.git
 ```
 
 Select the version and add it to your target.
-
-### CocoaPods
-
-Alternatively, add the following to your Podfile:
-
-```ruby
-pod "VoiceIt3-IosSDK"
-```
-
-Then run:
-
-```bash
-pod install
-```
 
 ### Permissions
 
