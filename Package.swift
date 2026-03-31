@@ -17,7 +17,6 @@ let package = Package(
             name: "VoiceIt3-IosSDK",
             path: "VoiceIt3-IosSDK",
             resources: [
-                .process("Assets"),
                 .process("Classes/Base.lproj"),
             ],
             publicHeadersPath: "Classes"
