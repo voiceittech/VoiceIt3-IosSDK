@@ -10,21 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Build Example App
-        run: |
-          cd Example
-          xcodebuild -project VoiceIt3Demo.xcodeproj -scheme VoiceIt3Demo \
-            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
-            -resolvePackageDependencies
-          xcodebuild -project VoiceIt3Demo.xcodeproj -scheme VoiceIt3Demo \
-            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
-            build
-
       - name: Boot Simulator and Clean Status Bar
         run: |
           DEVICE_ID=$(xcrun simctl list devices available | grep "iPhone 16" | head -1 | grep -oE '[A-F0-9-]{36}')
           echo "DEVICE_ID=$DEVICE_ID" >> $GITHUB_ENV
-          xcrun simctl boot "$DEVICE_ID"
+          xcrun simctl boot "$DEVICE_ID" 2>/dev/null || true
           sleep 5
           xcrun simctl status_bar "$DEVICE_ID" override \
             --time "9:41" \
@@ -33,34 +23,105 @@ jobs:
             --wifiBars 3 \
             --cellularBars 4
 
-      - name: Install and Launch App
+      - name: Build and Install Example App
         run: |
+          cd Example
+          xcodebuild -project VoiceIt3Demo.xcodeproj -scheme VoiceIt3Demo \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -resolvePackageDependencies
+          xcodebuild -project VoiceIt3Demo.xcodeproj -scheme VoiceIt3Demo \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            build
           APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "VoiceIt3Demo.app" -path "*/Build/Products/Debug-iphonesimulator/*" | head -1)
-          echo "Installing from: $APP_PATH"
           xcrun simctl install "$DEVICE_ID" "$APP_PATH"
-          xcrun simctl launch "$DEVICE_ID" io.voiceit.VoiceIt3Demo
-          sleep 4
 
-      - name: Capture Screenshot
+      - name: Launch App and Capture Top Screenshot
         run: |
           mkdir -p Graphics
-          xcrun simctl io "$DEVICE_ID" screenshot Graphics/demo_ios.png
-          echo "Screenshot captured"
+          xcrun simctl launch "$DEVICE_ID" io.voiceit.VoiceIt3Demo
+          sleep 4
+          xcrun simctl io "$DEVICE_ID" screenshot /tmp/demo_top_full.png
+          sips -Z 800 /tmp/demo_top_full.png --out Graphics/demo_top.png
+          echo "Top screenshot captured"
 
-      - name: Resize Screenshot
+      - name: Scroll Down and Capture Bottom Screenshot
         run: |
-          sips -Z 800 Graphics/demo_ios.png
-          echo "Resized to 800px height"
+          # Use Xcode's simctl to simulate swipe via accessibility
+          # Activate simulator and use AppleScript keyboard shortcut
+          open -a Simulator
+          sleep 2
+
+          # Simulate swipe by clicking and dragging in simulator window
+          python3 << 'EOF'
+          import subprocess, time
+
+          # Get simulator window position
+          result = subprocess.run(
+              ["osascript", "-e", 'tell application "System Events" to get {position, size} of front window of process "Simulator"'],
+              capture_output=True, text=True
+          )
+          print(f"Window info: {result.stdout.strip()}")
+
+          # Use cliclick if available, otherwise use osascript mouse events
+          # Simulate a drag from bottom to top of the simulator screen
+          script = '''
+          tell application "Simulator" to activate
+          delay 0.5
+          tell application "System Events"
+              set frontWindow to front window of process "Simulator"
+              set {winX, winY} to position of frontWindow
+              set {winW, winH} to size of frontWindow
+              set centerX to winX + (winW / 2)
+              set startY to winY + (winH * 0.8)
+              set endY to winY + (winH * 0.2)
+
+              -- Mouse down at bottom
+              click at {centerX, startY}
+              delay 0.1
+          end tell
+          '''
+          subprocess.run(["osascript", "-e", script], capture_output=True, text=True)
+          time.sleep(1)
+          EOF
+
+          # Try keyboard Page Down as fallback
+          osascript << 'APPLESCRIPT'
+            tell application "Simulator" to activate
+            delay 0.5
+            tell application "System Events"
+              key code 125 using {command down}
+              delay 0.3
+              key code 125 using {command down}
+              delay 0.3
+              key code 125 using {command down}
+              delay 0.3
+              key code 125 using {command down}
+              delay 0.3
+              key code 125 using {command down}
+              delay 0.3
+              key code 125 using {command down}
+              delay 0.3
+              key code 125 using {command down}
+              delay 0.3
+              key code 125 using {command down}
+            end tell
+          APPLESCRIPT
+
+          sleep 2
+          xcrun simctl io "$DEVICE_ID" screenshot /tmp/demo_bottom_full.png
+          sips -Z 800 /tmp/demo_bottom_full.png --out Graphics/demo_bottom.png
+          echo "Bottom screenshot captured"
 
       - name: Commit Screenshots
         run: |
           git config user.name "noel-enquanta"
           git config user.email "159802846+noel-enquanta@users.noreply.github.com"
-          git add Graphics/demo_ios.png
+          git rm Graphics/demo_ios.png 2>/dev/null || true
+          git add Graphics/demo_top.png Graphics/demo_bottom.png
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Update iOS demo screenshot from CI"
+            git commit -m "Update iOS demo screenshots from CI"
             git push
           fi
 
@@ -68,5 +129,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ios-screenshots
-          path: Graphics/demo_ios.png
+          path: |
+            Graphics/demo_top.png
+            Graphics/demo_bottom.png
           retention-days: 30
