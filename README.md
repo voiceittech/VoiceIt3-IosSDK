@@ -59,11 +59,10 @@ A fully comprehensive SDK that gives you access to VoiceIt's API 3.0 featuring V
       * [Video Identification](#video-identification)
 
 
-## UI Previews
-The built-in biometric capture UI works with both Swift and Objective-C. The following show Voice Verification, Face Verification, and Video Verification.
+## UI Screenshots
 
-<div style="background: #000 !important;">
-  <img width="290px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/voiceVerification.png?v=2" style="display: inline-block !important"/><img width="290px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/faceVerification.png?v=2" style="display: inline-block !important;"/><img width="290px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/videoVerification.png?v=2" style="display: inline-block !important;"/>
+<div>
+  <img width="290px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/demo_ios.png?v=1" style="display: inline-block !important;"/><img width="290px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/voiceVerification.png?v=2" style="display: inline-block !important"/><img width="290px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/faceVerification.png?v=2" style="display: inline-block !important;"/><img width="290px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/videoVerification.png?v=2" style="display: inline-block !important;"/>
 </div>
 
 ## Getting Started

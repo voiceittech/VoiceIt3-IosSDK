@@ -1,0 +1,72 @@
+name: Screenshots
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+on:
+  workflow_dispatch:
+
+jobs:
+  screenshots:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Build Example App
+        run: |
+          cd Example
+          xcodebuild -project VoiceIt3Demo.xcodeproj -scheme VoiceIt3Demo \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -resolvePackageDependencies
+          xcodebuild -project VoiceIt3Demo.xcodeproj -scheme VoiceIt3Demo \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            build
+
+      - name: Boot Simulator and Clean Status Bar
+        run: |
+          DEVICE_ID=$(xcrun simctl list devices available | grep "iPhone 16" | head -1 | grep -oE '[A-F0-9-]{36}')
+          echo "DEVICE_ID=$DEVICE_ID" >> $GITHUB_ENV
+          xcrun simctl boot "$DEVICE_ID"
+          sleep 5
+          xcrun simctl status_bar "$DEVICE_ID" override \
+            --time "9:41" \
+            --batteryState charged \
+            --batteryLevel 100 \
+            --wifiBars 3 \
+            --cellularBars 4
+
+      - name: Install and Launch App
+        run: |
+          APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "VoiceIt3Demo.app" -path "*/Build/Products/Debug-iphonesimulator/*" | head -1)
+          echo "Installing from: $APP_PATH"
+          xcrun simctl install "$DEVICE_ID" "$APP_PATH"
+          xcrun simctl launch "$DEVICE_ID" io.voiceit.VoiceIt3Demo
+          sleep 4
+
+      - name: Capture Screenshot
+        run: |
+          mkdir -p Graphics
+          xcrun simctl io "$DEVICE_ID" screenshot Graphics/demo_ios.png
+          echo "Screenshot captured"
+
+      - name: Resize Screenshot
+        run: |
+          sips -Z 800 Graphics/demo_ios.png
+          echo "Resized to 800px height"
+
+      - name: Commit Screenshots
+        run: |
+          git config user.name "noel-enquanta"
+          git config user.email "159802846+noel-enquanta@users.noreply.github.com"
+          git add Graphics/demo_ios.png
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update iOS demo screenshot from CI"
+            git push
+          fi
+
+      - name: Upload as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-screenshots
+          path: Graphics/demo_ios.png
+          retention-days: 30
