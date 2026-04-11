@@ -8,9 +8,9 @@ struct ContentView: View {
             ScrollView {
                 VStack(spacing: 0) {
                     // Header
-                    VStack(spacing: 8) {
+                    VStack(spacing: 4) {
                         Image(systemName: "lock.fill")
-                            .font(.system(size: 48))
+                            .font(.system(size: 40))
                             .foregroundColor(Color(hex: "#FBC132"))
                         Text("VoiceIt API 3.0")
                             .font(.system(size: 28, weight: .bold))
@@ -19,11 +19,11 @@ struct ContentView: View {
                             .font(.system(size: 15))
                             .foregroundColor(Color(hex: "#919EAB"))
                     }
-                    .padding(.top, 40)
-                    .padding(.bottom, 30)
+                    .padding(.top, 20)
+                    .padding(.bottom, 16)
 
                     // Credentials
-                    VStack(spacing: 12) {
+                    VStack(spacing: 8) {
                         DarkTextField(label: "API Key", text: $vm.apiKey, icon: "info.circle.fill")
                         DarkTextField(label: "API Token", text: $vm.apiToken, icon: "lock.fill", isSecure: true)
                         DarkTextField(label: "User ID", text: $vm.userId, icon: "person.fill")
@@ -59,19 +59,19 @@ struct ContentView: View {
                         .cornerRadius(8)
                     }
                     .padding(.horizontal, 24)
-                    .padding(.bottom, 24)
+                    .padding(.bottom, 12)
 
                     Divider()
                         .background(Color(hex: "#38424F"))
 
                     // Enrollment
-                    VStack(spacing: 16) {
+                    VStack(spacing: 12) {
                         Text("Enrollment")
                             .font(.system(size: 13, weight: .semibold))
                             .foregroundColor(Color(hex: "#919EAB"))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 24)
-                            .padding(.top, 16)
+                            .padding(.top, 12)
 
                         ActionButton(title: "Voice Enrollment", icon: "waveform", color: Color(hex: "#505050")) {
                             vm.startVoiceEnrollment()
@@ -88,7 +88,7 @@ struct ContentView: View {
                             .foregroundColor(Color(hex: "#919EAB"))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 24)
-                            .padding(.top, 8)
+                            .padding(.top, 4)
 
                         ActionButton(title: "Voice Verification", icon: "waveform", color: Color(hex: "#FBC132")) {
                             vm.startVoiceVerification()
@@ -169,7 +169,7 @@ struct ActionButton: View {
             }
             .foregroundColor(.white)
             .padding(.horizontal, 20)
-            .padding(.vertical, 14)
+            .padding(.vertical, 12)
             .background(color)
             .cornerRadius(12)
         }
