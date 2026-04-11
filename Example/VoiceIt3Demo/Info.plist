@@ -7,6 +7,6 @@
     <key>NSMicrophoneUsageDescription</key>
     <string>Microphone access is required for voice and video biometric verification</string>
     <key>UIUserInterfaceStyle</key>
-    <string>Light</string>
+    <string>Dark</string>
 </dict>
 </plist>

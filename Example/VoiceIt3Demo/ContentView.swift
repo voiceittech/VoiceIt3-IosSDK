@@ -5,52 +5,70 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
-                // Header
-                VStack(spacing: 8) {
-                    Image(systemName: "lock.shield.fill")
-                        .font(.system(size: 48))
-                        .foregroundColor(Color(hex: "#FBC132"))
-                    Text("VoiceIt API 3.0")
-                        .font(.system(size: 28, weight: .bold))
-                    Text("Biometric Verification Demo")
-                        .font(.system(size: 15))
-                        .foregroundColor(.secondary)
-                }
-                .padding(.top, 40)
-                .padding(.bottom, 30)
-
-                // Credentials
-                VStack(spacing: 12) {
-                    CredentialField(label: "API Key", text: $vm.apiKey, icon: "key.fill")
-                    CredentialField(label: "API Token", text: $vm.apiToken, icon: "lock.fill")
-                    CredentialField(label: "User ID", text: $vm.userId, icon: "person.fill")
-
-                    HStack(spacing: 12) {
-                        TextField("Phrase", text: $vm.phrase)
-                            .textFieldStyle(.roundedBorder)
-                            .font(.system(size: 14))
-
-                        Picker("", selection: $vm.contentLanguage) {
-                            Text("en-US").tag("en-US")
-                            Text("es-ES").tag("es-ES")
-                            Text("no-STT").tag("no-STT")
-                        }
-                        .pickerStyle(.menu)
-                        .frame(width: 100)
+            ScrollView {
+                VStack(spacing: 0) {
+                    // Header
+                    VStack(spacing: 8) {
+                        Image(systemName: "lock.fill")
+                            .font(.system(size: 48))
+                            .foregroundColor(Color(hex: "#FBC132"))
+                        Text("VoiceIt API 3.0")
+                            .font(.system(size: 28, weight: .bold))
+                            .foregroundColor(.white)
+                        Text("Biometric Verification Demo")
+                            .font(.system(size: 15))
+                            .foregroundColor(Color(hex: "#919EAB"))
                     }
-                }
-                .padding(.horizontal, 24)
-                .padding(.bottom, 24)
+                    .padding(.top, 40)
+                    .padding(.bottom, 30)
 
-                Divider()
+                    // Credentials
+                    VStack(spacing: 12) {
+                        DarkTextField(label: "API Key", text: $vm.apiKey, icon: "info.circle.fill")
+                        DarkTextField(label: "API Token", text: $vm.apiToken, icon: "lock.fill", isSecure: true)
+                        DarkTextField(label: "User ID", text: $vm.userId, icon: "person.fill")
 
-                // Action buttons
-                ScrollView {
+                        // Phrase - separate label above field
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Phrase")
+                                .font(.system(size: 12))
+                                .foregroundColor(Color(hex: "#919EAB"))
+                            TextField("", text: $vm.phrase)
+                                .font(.system(size: 14))
+                                .foregroundColor(.white)
+                                .padding(12)
+                                .background(Color(hex: "#38424F"))
+                                .cornerRadius(8)
+                                .autocapitalization(.none)
+                                .disableAutocorrection(true)
+                        }
+
+                        // Language picker - separate row
+                        HStack {
+                            Picker("", selection: $vm.contentLanguage) {
+                                Text("en-US").tag("en-US")
+                                Text("es-ES").tag("es-ES")
+                                Text("no-STT").tag("no-STT")
+                            }
+                            .pickerStyle(.menu)
+                            .tint(.white)
+                            Spacer()
+                        }
+                        .padding(12)
+                        .background(Color(hex: "#38424F"))
+                        .cornerRadius(8)
+                    }
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 24)
+
+                    Divider()
+                        .background(Color(hex: "#38424F"))
+
+                    // Enrollment
                     VStack(spacing: 16) {
                         Text("Enrollment")
                             .font(.system(size: 13, weight: .semibold))
-                            .foregroundColor(.secondary)
+                            .foregroundColor(Color(hex: "#919EAB"))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 24)
                             .padding(.top, 16)
@@ -67,7 +85,7 @@ struct ContentView: View {
 
                         Text("Verification")
                             .font(.system(size: 13, weight: .semibold))
-                            .foregroundColor(.secondary)
+                            .foregroundColor(Color(hex: "#919EAB"))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 24)
                             .padding(.top, 8)
@@ -85,7 +103,7 @@ struct ContentView: View {
                     .padding(.bottom, 24)
                 }
             }
-            .background(Color(UIColor.systemGroupedBackground))
+            .background(Color(hex: "#212B36"))
             .onTapGesture {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
@@ -98,22 +116,38 @@ struct ContentView: View {
     }
 }
 
-struct CredentialField: View {
+struct DarkTextField: View {
     let label: String
     @Binding var text: String
     let icon: String
+    var isSecure: Bool = false
 
     var body: some View {
         HStack(spacing: 10) {
             Image(systemName: icon)
                 .foregroundColor(Color(hex: "#FBC132"))
                 .frame(width: 20)
-            TextField(label, text: $text)
-                .textFieldStyle(.roundedBorder)
-                .font(.system(size: 14))
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
+            if isSecure {
+                SecureField(label, text: $text)
+                    .font(.system(size: 14))
+                    .foregroundColor(.white)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+            } else {
+                TextField(label, text: $text)
+                    .font(.system(size: 14))
+                    .foregroundColor(.white)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+            }
         }
+        .padding(12)
+        .background(Color(hex: "#38424F"))
+        .cornerRadius(8)
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color(hex: "#FBC132").opacity(0.3), lineWidth: 1)
+        )
     }
 }
 
@@ -130,11 +164,8 @@ struct ActionButton: View {
                     .font(.system(size: 18))
                     .frame(width: 24)
                 Text(title)
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.system(size: 15, weight: .semibold))
                 Spacer()
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 14))
-                    .foregroundColor(.white.opacity(0.7))
             }
             .foregroundColor(.white)
             .padding(.horizontal, 20)
