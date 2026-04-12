@@ -51,7 +51,7 @@ class VoiceItViewModel: ObservableObject {
 
     private func topViewController() -> UIViewController? {
         guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = scene.windows.first(where: { $0.isKeyWindow }),
+              let window = scene.keyWindow,
               var top = window.rootViewController else { return nil }
         while let presented = top.presentedViewController {
             top = presented
