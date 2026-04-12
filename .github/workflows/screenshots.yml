@@ -82,41 +82,50 @@ jobs:
           xcrun simctl terminate "$DEVICE_ID" io.voiceit.VoiceIt3Demo
           sleep 2
 
-      - name: Capture Voice Enrollment Screenshot
+      - name: Get Window Coordinates
         run: |
-          # Launch with credentials via launch arguments
-          xcrun simctl launch "$DEVICE_ID" io.voiceit.VoiceIt3Demo \
-            --apiKey "${{ secrets.VOICEIT_API_KEY }}" \
-            --apiToken "${{ secrets.VOICEIT_API_TOKEN }}" \
-            --userId "$USER_ID"
-          sleep 4
-
-          # Get window coordinates
           open -a Simulator
-          sleep 1
+          sleep 2
           WINDOW_INFO=$(osascript -e 'tell application "System Events" to get {position, size} of front window of process "Simulator"')
           WIN_X=$(echo $WINDOW_INFO | cut -d',' -f1 | tr -d ' ')
           WIN_Y=$(echo $WINDOW_INFO | cut -d',' -f2 | tr -d ' ')
           WIN_W=$(echo $WINDOW_INFO | cut -d',' -f3 | tr -d ' ')
           WIN_H=$(echo $WINDOW_INFO | cut -d',' -f4 | tr -d ' ')
-          echo "WINDOW_INFO=$WINDOW_INFO" >> $GITHUB_ENV
           echo "WIN_X=$WIN_X" >> $GITHUB_ENV
           echo "WIN_Y=$WIN_Y" >> $GITHUB_ENV
           echo "WIN_W=$WIN_W" >> $GITHUB_ENV
           echo "WIN_H=$WIN_H" >> $GITHUB_ENV
           CENTER_X=$((WIN_X + WIN_W / 2))
           echo "CENTER_X=$CENTER_X" >> $GITHUB_ENV
+          # Continue button is near the bottom of the screen
+          CONTINUE_Y=$((WIN_Y + WIN_H * 92 / 100))
+          echo "CONTINUE_Y=$CONTINUE_Y" >> $GITHUB_ENV
+          echo "Window: $WIN_X,$WIN_Y $WIN_W x $WIN_H center=$CENTER_X continue=$CONTINUE_Y"
+
+      - name: Capture Voice Enrollment Screenshot
+        run: |
+          xcrun simctl launch "$DEVICE_ID" io.voiceit.VoiceIt3Demo \
+            --apiKey "${{ secrets.VOICEIT_API_KEY }}" \
+            --apiToken "${{ secrets.VOICEIT_API_TOKEN }}" \
+            --userId "$USER_ID"
+          sleep 4
+          open -a Simulator
+          sleep 1
 
           # Tap Voice Enrollment button
           VOICE_BTN_Y=$((WIN_Y + WIN_H * 65 / 100))
           cliclick "c:$CENTER_X,$VOICE_BTN_Y"
-          sleep 4
+          sleep 3
 
+          # Tap Continue button on setup screen
+          cliclick "c:$CENTER_X,$CONTINUE_Y"
+          sleep 3
+
+          # Now on actual recording screen - capture it
           xcrun simctl io "$DEVICE_ID" screenshot /tmp/voice_full.png
           sips -Z 800 /tmp/voice_full.png --out Graphics/voiceVerification.png
 
-          # Wait for timeout and go back
-          sleep 8
+          sleep 6
           xcrun simctl terminate "$DEVICE_ID" io.voiceit.VoiceIt3Demo
           sleep 2
 
@@ -127,15 +136,19 @@ jobs:
             --apiToken "${{ secrets.VOICEIT_API_TOKEN }}" \
             --userId "$USER_ID"
           sleep 4
-
           open -a Simulator
           sleep 1
 
           # Tap Face Enrollment button
           FACE_BTN_Y=$((WIN_Y + WIN_H * 71 / 100))
           cliclick "c:$CENTER_X,$FACE_BTN_Y"
-          sleep 5
+          sleep 3
 
+          # Tap Continue button on setup screen
+          cliclick "c:$CENTER_X,$CONTINUE_Y"
+          sleep 4
+
+          # Now on actual camera recording screen - capture it
           xcrun simctl io "$DEVICE_ID" screenshot /tmp/face_full.png
           sips -Z 800 /tmp/face_full.png --out Graphics/faceVerification.png
 
@@ -149,15 +162,19 @@ jobs:
             --apiToken "${{ secrets.VOICEIT_API_TOKEN }}" \
             --userId "$USER_ID"
           sleep 4
-
           open -a Simulator
           sleep 1
 
           # Tap Video Enrollment button
           VIDEO_BTN_Y=$((WIN_Y + WIN_H * 77 / 100))
           cliclick "c:$CENTER_X,$VIDEO_BTN_Y"
-          sleep 5
+          sleep 3
 
+          # Tap Continue button on setup screen
+          cliclick "c:$CENTER_X,$CONTINUE_Y"
+          sleep 4
+
+          # Now on actual camera+voice recording screen - capture it
           xcrun simctl io "$DEVICE_ID" screenshot /tmp/video_full.png
           sips -Z 800 /tmp/video_full.png --out Graphics/videoVerification.png
 
