@@ -1,11 +1,11 @@
-<img src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/ios.png" width="100%" style="width:100%">
+<img src="https://raw.githubusercontent.com/voiceittech/voiceit3-ios-sdk/main/Graphics/ios.png" width="100%" style="width:100%">
 
 
-[![Build](https://github.com/voiceittech/voiceit3-iossdk/actions/workflows/test.yml/badge.svg)](https://github.com/voiceittech/voiceit3-iossdk/actions/workflows/test.yml)
-[![Dependabot](https://img.shields.io/github/issues-pr/voiceittech/voiceit3-iossdk/dependencies?label=dependabot&logo=dependabot&color=025e8c)](https://github.com/voiceittech/voiceit3-iossdk/pulls?q=is%3Apr+label%3Adependencies)
-[![Version](https://img.shields.io/badge/version-3.2.0-blue)](https://github.com/voiceittech/voiceit3-iossdk)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green)](https://github.com/voiceittech/voiceit3-iossdk/blob/main/LICENSE)
-[![Platform](https://img.shields.io/badge/platform-iOS%2015%2B-lightgrey)](https://github.com/voiceittech/voiceit3-iossdk)
+[![Build](https://github.com/voiceittech/voiceit3-ios-sdk/actions/workflows/test.yml/badge.svg)](https://github.com/voiceittech/voiceit3-ios-sdk/actions/workflows/test.yml)
+[![Dependabot](https://img.shields.io/github/issues-pr/voiceittech/voiceit3-ios-sdk/dependencies?label=dependabot&logo=dependabot&color=025e8c)](https://github.com/voiceittech/voiceit3-ios-sdk/pulls?q=is%3Apr+label%3Adependencies)
+[![Version](https://img.shields.io/badge/version-3.2.0-blue)](https://github.com/voiceittech/voiceit3-ios-sdk)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](https://github.com/voiceittech/voiceit3-ios-sdk/blob/main/LICENSE)
+[![Platform](https://img.shields.io/badge/platform-iOS%2015%2B-lightgrey)](https://github.com/voiceittech/voiceit3-ios-sdk)
 [![Swift Package Manager](https://img.shields.io/badge/SPM-compatible-brightgreen)](https://swift.org/package-manager/)
 [![VoiceIt API](https://img.shields.io/badge/VoiceIt-API%203.0-blue)](https://voiceit.io)
 
@@ -62,14 +62,14 @@ A fully comprehensive SDK that gives you access to VoiceIt's API 3.0 featuring V
 ## UI Screenshots
 
 <div>
-  <img width="250px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/demo_top.png?v=4" style="display: inline-block !important;"/><img width="250px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/demo_bottom.png?v=4" style="display: inline-block !important;"/><img width="250px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/voiceVerification.png?v=4" style="display: inline-block !important"/><img width="250px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/faceVerification.png?v=4" style="display: inline-block !important;"/><img width="250px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/videoVerification.png?v=4" style="display: inline-block !important;"/>
+  <img width="250px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-ios-sdk/main/Graphics/demo_top.png?v=4" style="display: inline-block !important;"/><img width="250px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-ios-sdk/main/Graphics/demo_bottom.png?v=4" style="display: inline-block !important;"/><img width="250px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-ios-sdk/main/Graphics/voiceVerification.png?v=4" style="display: inline-block !important"/><img width="250px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-ios-sdk/main/Graphics/faceVerification.png?v=4" style="display: inline-block !important;"/><img width="250px" src="https://raw.githubusercontent.com/voiceittech/voiceit3-ios-sdk/main/Graphics/videoVerification.png?v=4" style="display: inline-block !important;"/>
 </div>
 
 ## Getting Started
 
 Sign up at [voiceit.io/pricing](https://voiceit.io/pricing) to get your API Key and Token, then log in to the [Dashboard](https://dashboard.voiceit.io) to manage your account.
 
-<img src="https://raw.githubusercontent.com/voiceittech/voiceit3-iossdk/main/Graphics/getcredentials.png" alt="API Key and Token" width="400px" />
+<img src="https://raw.githubusercontent.com/voiceittech/voiceit3-ios-sdk/main/Graphics/getcredentials.png" alt="API Key and Token" width="400px" />
 
 ## Installation
 
@@ -78,7 +78,7 @@ Sign up at [voiceit.io/pricing](https://voiceit.io/pricing) to get your API Key 
 In Xcode, go to **File > Add Package Dependencies** and enter the repository URL:
 
 ```
-https://github.com/voiceittech/voiceit3-iossdk.git
+https://github.com/voiceittech/voiceit3-ios-sdk.git
 ```
 
 Select the version and add it to your target.
@@ -105,7 +105,7 @@ Make sure you review your Voiceprint Phrases by navigating to <a href="https://d
 All strings utilized in the encapsulated views for the SDK and the prompts provided to the user can be modified by editing the strings in the Prompts.strings file located at
 
 ```
-voiceit3-iossdk/Classes/Base.lproj/Prompts.strings
+voiceit3-ios-sdk/Classes/Base.lproj/Prompts.strings
 ```
 
 ## API Calls
@@ -809,8 +809,8 @@ For detailed API documentation, visit [voiceit.io/documentation](https://voiceit
 
 If you find this SDK useful, please consider giving it a star on GitHub — it helps others discover the project!
 
-[![GitHub stars](https://img.shields.io/github/stars/voiceittech/voiceit3-iossdk?style=social)](https://github.com/voiceittech/voiceit3-iossdk/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/voiceittech/voiceit3-ios-sdk?style=social)](https://github.com/voiceittech/voiceit3-ios-sdk/stargazers)
 
 ## License
 
-voiceit3-iossdk is available under the MIT license. See the LICENSE file for more info.
+voiceit3-ios-sdk is available under the MIT license. See the LICENSE file for more info.
