@@ -8,7 +8,7 @@ jobs:
   screenshots:
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Install cliclick
         run: brew install cliclick
