@@ -158,7 +158,12 @@ import Network
     // MARK: - Response Codes
 
     @objc public static func isBadResponseCode(_ code: String) -> Bool {
-        ["MISP", "UNFD", "DDNE", "IFAD", "IFVD", "GERR", "DAID", "UNAC", "CLNE", "ACLR", "FALI"].contains(code)
+        // Config/permanent errors that will NEVER succeed on retry are terminal —
+        // added INPP/UDNM/ENFD/INCP/IEID/NPFC/ULMT/EROR so the flow exits with a
+        // clear message instead of silently re-recording (the INPP retry-loop the
+        // web-SDK hit). FADF/EMPF stay retryable (transient — may pass on retry).
+        ["MISP", "UNFD", "DDNE", "IFAD", "IFVD", "GERR", "DAID", "UNAC", "CLNE", "ACLR", "FALI",
+         "INPP", "UDNM", "ENFD", "INCP", "IEID", "NPFC", "ULMT", "EROR"].contains(code)
     }
 }
 

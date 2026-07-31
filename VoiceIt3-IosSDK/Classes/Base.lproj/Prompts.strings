@@ -56,7 +56,7 @@
 "FNFD" = "Sorry, I couldn't quite see your face.\nPlease try again.";
 "DDNE" = "Sorry, something went wrong.\nPlease try again.";
 "FAIL" = "Failed.\nPlease try again.";
-"IFWD" = "Sorry, something went wrong.\nPlease try again.";
+"IFVD" = "Sorry, something went wrong.\nPlease try again.";
 "SRNR"= "Sorry, I couldn't quite hear you.\nPlease speak louder.";
 "TVER"= "Sorry, not enough video enrollments detected.\nPlease enroll before verifying.";
 "NFEF"= "Sorry, not enough face enrollments detected.\nPlease enroll before verifying.";
@@ -73,6 +73,24 @@
 "PNTE"= "Sorry, not enough enrollments detected.\nPlease enroll before verifying.";
 "PNTE_IDENTIFICATION"= "Sorry, not enough enrollments detected.\nPlease enroll before identification.";
 "GERR"= "Sorry, something went wrong.\nPlease try again.";
+/* Added for parity with the web-SDK: every API 3.0 response code now has a
+   message so an unmapped code no longer surfaces the raw 4-letter code. */
+"FALI" = "Liveness check failed.\nPlease try again.";
+"IFAD" = "Sorry, the audio couldn't be processed.\nPlease try again.";
+"UNFD" = "Sorry, user not found.\nPlease contact the app developer.";
+"MISP" = "Sorry, something went wrong.\nPlease contact app developer with response code MISP.";
+"DAID" = "This account is currently disabled.\nPlease contact the app developer.";
+"UNAC" = "Access denied.\nPlease contact the app developer.";
+"FADF" = "Sorry, we couldn't confirm a live capture.\nPlease try again in good lighting, looking directly at the camera.";
+"INPP" = "Sorry, that phrase isn't set up for this account.\nPlease contact the app developer.";
+"UDNM" = "Sorry, something went wrong.\nPlease contact app developer with response code UDNM.";
+"ENFD" = "Sorry, no enrollment was found.\nPlease enroll before verifying.";
+"EMPF" = "The recording was empty.\nPlease try again.";
+"INCP" = "Sorry, that content language isn't supported.\nPlease contact the app developer.";
+"IEID" = "Sorry, something went wrong.\nPlease contact app developer with response code IEID.";
+"NPFC" = "Sorry, no phrases are available for this language.\nPlease contact the app developer.";
+"ULMT" = "Sorry, the user limit has been reached.\nPlease contact the app developer.";
+"EROR" = "Sorry, something went wrong.\nPlease try again.";
 "CONTACT_DEVELOPER" = "Error:\n Please contact app developer with response code \"%@\".";
 
 /* Error Handling */
