@@ -82,6 +82,7 @@
 "DAID" = "This account is currently disabled.\nPlease contact the app developer.";
 "UNAC" = "Access denied.\nPlease contact the app developer.";
 "FADF" = "Sorry, we couldn't confirm a live capture.\nPlease try again in good lighting, looking directly at the camera.";
+"INJD" = "Sorry, we couldn't verify this capture came from a live camera.\nPlease use your device's camera and try again.";
 "INPP" = "Sorry, that phrase isn't set up for this account.\nPlease contact the app developer.";
 "UDNM" = "Sorry, something went wrong.\nPlease contact app developer with response code UDNM.";
 "ENFD" = "Sorry, no enrollment was found.\nPlease enroll before verifying.";

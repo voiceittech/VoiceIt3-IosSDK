@@ -163,7 +163,7 @@ import Network
         // clear message instead of silently re-recording (the INPP retry-loop the
         // web-SDK hit). FADF/EMPF stay retryable (transient — may pass on retry).
         ["MISP", "UNFD", "DDNE", "IFAD", "IFVD", "GERR", "DAID", "UNAC", "CLNE", "ACLR", "FALI",
-         "INPP", "UDNM", "ENFD", "INCP", "IEID", "NPFC", "ULMT", "EROR"].contains(code)
+         "INPP", "UDNM", "ENFD", "INCP", "IEID", "NPFC", "ULMT", "EROR", "INJD"].contains(code)
     }
 }
 
